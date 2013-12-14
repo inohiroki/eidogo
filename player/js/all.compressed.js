@@ -1008,6 +1008,9 @@ break;
 default:
 if(_30.indexOf("var:")==0){
 _32=_30.substring(4);
+if(this.player.prefs.variationsLabel==="alphabet"){
+_32=String.fromCharCode(Number(_32)-1+"A".charCodeAt(0));
+}
 _30="variation";
 }else{
 _32=_30;
@@ -1325,6 +1328,7 @@ this.prefs.showComments=typeof cfg.showComments!="undefined"?!!cfg.showComments:
 this.prefs.showOptions=!!cfg.showOptions;
 this.prefs.showNavTree=!this.progressiveLoad&&typeof cfg.showNavTree!="undefined"?!!cfg.showNavTree:false;
 this.prefs.showMoveNumber=!!cfg.showMoveNumber;
+this.prefs.variationsLabel=typeof cfg.variationsLabel!="undefined"?cfg.variationsLabel:"number";
 },loadSgf:function(cfg,_16){
 cfg=cfg||{};
 this.nowLoading();
@@ -2640,7 +2644,11 @@ this.board.addMarker(_125,"var:"+_123);
 }
 var _127=document.createElement("div");
 _127.className="variation-nav";
+if(this.prefs.variationsLabel==="alphabet"){
+_127.innerHTML=String.fromCharCode(_123-1+"A".charCodeAt(0));
+}else{
 _127.innerHTML=_123;
+}
 _4(_127,"click",function(e,arg){
 arg.me.variation(arg.varNum);
 },{me:this,varNum:this.variations[i].varNum});

@@ -310,6 +310,7 @@ eidogo.Player.prototype = {
         this.prefs.showNavTree = !this.progressiveLoad && typeof cfg.showNavTree != "undefined" ?
             !!cfg.showNavTree : false;
         this.prefs.showMoveNumber = !!cfg.showMoveNumber;
+		this.prefs.variationsLabel = typeof cfg.variationsLabel != "undefined" ? cfg.variationsLabel : "number";
     },
     
     /**
@@ -1961,7 +1962,11 @@ eidogo.Player.prototype = {
             // show variation under controls
             var varNav = document.createElement("div");
             varNav.className = "variation-nav";
-            varNav.innerHTML = varLabel;
+            if(this.prefs.variationsLabel === "alphabet"){
+                varNav.innerHTML = String.fromCharCode(varLabel -1 + "A".charCodeAt(0));
+            }else{
+                varNav.innerHTML = varLabel;
+            }
             addEvent(
                 varNav,
                 "click",

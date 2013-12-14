@@ -308,6 +308,9 @@ eidogo.BoardRendererHtml.prototype = {
                 default:
                     if (type.indexOf("var:") == 0) {
                         text = type.substring(4);
+                        if(this.player.prefs.variationsLabel === "alphabet"){
+                            text = String.fromCharCode(Number(text) - 1 + "A".charCodeAt(0));
+                        }
                         type = "variation";
                     } else {
                         text = type;
